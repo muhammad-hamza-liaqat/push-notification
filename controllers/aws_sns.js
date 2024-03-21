@@ -89,3 +89,7 @@ sns.subscribe(params, function(err, data) {
         console.log(data);
     }
 });
+
+
+// https://repost.aws/questions/QUD0e-m7S_QwSx5s8-3PwTEw/how-to-send-push-notifications-using-aws-sns-service-to-android-in-node-js
+
