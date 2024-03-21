@@ -1,0 +1,19 @@
+{
+  "name": "push_notifications",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.0.0-beta.2",
+    "dotenv": "^16.4.5",
+    "express": "^5.0.0-beta.2",
+    "node-pushnotifications": "^2.1.1",
+    "web-push": "^3.6.7"
+  }
+}

@@ -1,0 +1,14 @@
+# ignore npm modules
+node_modules/
+
+# ignore env
+.env
+
+# command to generate vapid keys
+./node_modules/.bin/web-push generate-vapid-keys
+
+# package-lock.json
+package-lock.json
+
+# ds store
+.DS_store
