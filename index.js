@@ -1,28 +1,41 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-require("dotenv").config();
-const webpush = require("web-push");
-const path = require("path");
-const PushNotifications = require("node-pushnotifications");
-
+const express = require('express');
+const Pushy = require('pushy');
 const app = express();
-// set static path
-app.use(express.static(path.join(__dirname, "client")));
+app.use(express.json());
+require("dotenv").config();
 
-app.use(bodyParser.json());
+// Initialize Pushy client with your API key
+const pushyAPI = new Pushy(process.env.PUSHY_API_KEY);
 
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
+let subscriptions = [];
+
+app.post('/subscribe', (req, res) => {
+  const subscription = req.body;
+  console.log("subscription", subscription);
+  subscriptions.push(subscription);
+  res.status(201).json({ message: "Subscription successful!", status_code: 201 });
 });
 
-// server
-app.listen(process.env.PORT, () => {
-  console.log(`server running at http://localhost:${process.env.PORT}/`);
+app.post('/send-notification', (req, res) => {
+  const { pushyToken, notification } = req.body;
+  if (!pushyToken || !notification) {
+    return res.status(400).json({ error: 'Device token and notification payload are required' });
+  }
+  const recipient = pushyToken.toString();
+
+  pushyAPI.sendPushNotification(notification, recipient, {}, (err, id) => {
+    if (err) {
+      console.error('Error sending notification:', err);
+      return res.status(500).json({ error: 'Error sending notification' });
+    }
+    console.log('Notification sent successfully with ID:', id);
+    res.status(200).json({ message: 'Notification sent successfully' });
+  });
+});
+
+
+
+const PORT = process.env.PORT ;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
