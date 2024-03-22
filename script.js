@@ -17,7 +17,7 @@ const requestNotificationPermission = async () => {
   if (permission !== "granted") {
     throw new Error("Notification permission not granted");
   } else {
-    new Notification("hello world!");
+    new Notification("pushed notification to the web through service worker!");
   }
 };
 
