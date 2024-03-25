@@ -31,9 +31,9 @@ sns.createTopic(params, (err, data) => {
 // aws sdk to send push notifications
 // const AWS = require('aws-sdk');
 
-const sns = new AWS.SNS();
+// const sns = new AWS.SNS();
 
-const params = {
+const params3 = {
     Message: 'Your push notification message',
     MessageStructure: 'string',
     TargetArn: 'your-topic-arn'
@@ -43,7 +43,7 @@ const params = {
     // which will uniquely identifies your SNS topic.
 };
 
-sns.publish(params, (err, data) => {
+sns.publish(params3, (err, data) => {
     if (err) {
         console.error('Error sending a push notification:', err);
     } else {
@@ -64,16 +64,16 @@ AWS.config.update({
 });
 
 // Create a new SNS object
-const sns = new AWS.SNS();
+// const sns = new AWS.SNS();
 
 // Define the parameters for publishing a message
-const params = {
+const params2 = {
     Message: 'Hello from SNS!', // The message you want to publish
     TopicArn: 'arn:aws:sns:your-region:your-account-id:MyTopic' // Replace with your SNS topic ARN
 };
 
 // Publish the message to the SNS topic
-sns.publish(params, (err, data) => {
+sns.publish(params2, (err, data) => {
     if (err) {
         console.error('Error publishing message:', err);
     } else {
